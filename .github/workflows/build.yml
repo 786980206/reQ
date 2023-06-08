@@ -1,0 +1,29 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  workflow_dispatch:
+
+env:
+  version: 20230608
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+      # Runs a set of commands using the runners shell
+      - name: build
+        run: |
+          echo Building req_${version}.q...
+          cat req/ext/os.q req/url.q req/cookie.q req/b64.q req/status.q req/req.q req/auth.q req/multipart.q req/timeout.q > req_${version}.q
+          echo Done
+      - uses: actions/upload-artifact@v3
+        with:
+          name: req.q
+          path: req_${version}.q
+
