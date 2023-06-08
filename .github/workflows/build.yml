@@ -25,5 +25,5 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: req.q
-          path: req_${version}.q
+          path: req_*.q
 
